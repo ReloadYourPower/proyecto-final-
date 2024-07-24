@@ -1,0 +1,39 @@
+<h1>Subir Archivos</h1>
+<!-- Formulario para subir documentos -->
+<h1>Subir Documentos</h1>
+<form action="/profile/users/{{userId}}/documents" method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="identification">Identificación:</label>
+    <input type="file" name="identification" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="proofOfAddress">Comprobante de domicilio:</label>
+    <input type="file" name="proofOfAddress" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="bankStatement">Comprobante de estado de cuenta:</label>
+    <input type="file" name="bankStatement" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-primary">Subir Documentos</button>
+</form>
+
+
+<!-- Formulario para subir imagen de perfil -->
+<h2>Subir Imagen de Perfil</h2>
+<form action="/profile/users/{{userId}}/profileImage" method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="profileImage">Seleccionar imagen de perfil:</label>
+    <input type="file" name="profileImage" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-primary">Subir Imagen de Perfil</button>
+</form>
+
+<!-- Formulario para subir imagen de producto -->
+<h2>Subir Imagen de Producto</h2>
+<form action="/profile/users/{{userId}}/productImage" method="POST" enctype="multipart/form-data">
+  <div class="form-group">
+    <label for="productImage">Seleccionar imagen de producto:</label>
+    <input type="file" name="productImage" class="form-control">
+  </div>
+  <button type="submit" class="btn btn-primary">Subir Imagen de Producto</button>
+</form>

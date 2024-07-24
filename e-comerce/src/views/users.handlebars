@@ -1,0 +1,45 @@
+<h1>Users</h1>
+{{#if error_msg}}
+  <div class="alert alert-danger" role="alert">
+    {{error_msg}}
+  </div>
+{{/if}}
+{{#if success_msg}}
+  <div class="alert alert-success" role="alert">
+    {{success_msg}}
+  </div>
+{{/if}}
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Role</th>
+      <th scope="col">Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each users}}
+      <tr>
+        <td>{{this.id}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.email}}</td>
+        <td>{{this.role}}</td>
+        <td>
+          <a href="/profile/users/{{this.id}}/" class="btn btn-primary btn-sm">Update</a>
+   <form action="/profile/users/premium/{{this.id}}" method="POST" class="d-inline">
+            <input type="hidden" name="_method" value="PUT">
+            <button type="submit" class="btn btn-primary btn-sm">
+              {{#if (eq this.role "user")}}Solicitar Premium{{else}}Revocar Premium{{/if}}
+            </button>
+          </form>
+          <form action="/profile/users/delete/{{this.id}}" method="post" style="display:inline;">
+            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+          </form>
+          <a href="/profile/users/{{this.id}}/documents" class="btn btn-info btn-sm">Subir Documentos</a>
+        </td>
+      </tr>
+    {{/each}}
+  </tbody>
+</table>

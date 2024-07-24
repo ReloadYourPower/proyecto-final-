@@ -1,0 +1,28 @@
+<div class="container mt-5">
+    <h3>Carrito de Compras</h3>
+    <div id="cart-list">
+        {{#if cart.products.length}}
+            {{#each cart.products}}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.product.name}}</h5>
+                        <p class="card-text">{{this.product.description}}</p>
+                        <p class="card-text">Price: ${{this.product.price}}</p>
+                        <form action="/cart/modify/{{this.product._id}}" method="POST">
+                            <input type="number" name="quantity" value="{{this.quantity}}" min="1" required>
+                            <button type="submit" class="btn btn-primary">Actualizar Cantidad</button>
+                        </form>
+                        <form action="/cart/delete/{{this.product._id}}" method="POST">
+                            <button type="submit" class="btn btn-danger">Eliminar Producto</button>
+                        </form>
+                    </div>
+                </div>
+            {{/each}}
+            <form action="/cart/purchase/{{cart._id}}" method="POST">
+                <button type="submit" class="btn btn-success">Comprar Carrito</button>
+            </form>
+        {{else}}
+            <p>No hay productos en el carrito.</p>
+        {{/if}}
+    </div>
+</div>

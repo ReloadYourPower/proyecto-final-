@@ -1,0 +1,49 @@
+
+<div class="container mt-5">
+    <h3>Carrito de Compras</h3>
+    <div id="cart-list">
+        {{#if cart.products.length}}
+            {{#each cart.products}}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.productName}}</h5>
+                        <p class="card-text">{{this.description}}</p>
+                        <p class="card-text" >Price: ${{this.price}}</p>
+                        <form action="/profile/cart/modify/{{this.productId}}" method="POST">
+                            <input type="number" name="quantity" id="{{quantity}}" value="1">
+                            <button type="submit" class="btn btn-primary">Actualizar Cantidad</button>
+                        </form>
+                        <form action="/profile/cart/delete/{{this.productId}}" method="POST">
+                            <button type="submit" class="btn btn-danger">Eliminar Producto</button>
+                        </form>
+                    </div>
+                </div>
+            {{/each}}
+    <form action="/profile/payment" method="POST" id="payment-form">
+  <div class="container mt-4">
+    <h2>Detalles de Pago</h2>
+    <div class="form-group">
+      <label for="paymentMethod">Método de Pago</label>
+      <select class="form-control" id="paymentMethod" name="paymentMethod" required>
+        <option value="creditCard">Tarjeta de Crédito</option>
+        <option value="debitCard">Tarjeta de Débito</option>
+        <option value="paypal">PayPal</option>
+      </select>
+    </div>
+    </div>
+    <button type="submit" class="btn btn-success mt-3">Realizar Pago</button>
+  </div>
+</form>
+
+
+
+
+{{!-- <script src="./viewsUtils/stripe.js">
+</script> --}}
+
+
+        {{else}}
+            <p>No hay productos en el carrito.</p>
+        {{/if}}
+    </div>
+</div>

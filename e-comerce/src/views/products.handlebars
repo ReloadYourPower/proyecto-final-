@@ -1,0 +1,86 @@
+<div class="container mt-5">
+    <h3>Product Search</h3>
+    <form action="/products" method="GET" class="mb-4">
+        <div class="row">
+            <div class="col-md-4 mb-3">
+                <input type="text" name="search" class="form-control" placeholder="Buscar por nombre o descripción" value="{{search}}">
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="number" name="minPrice" class="form-control" placeholder="Precio mínimo" value="{{minPrice}}">
+            </div>
+            <div class="col-md-4 mb-3">
+                <input type="number" name="maxPrice" class="form-control" placeholder="Precio máximo" value="{{maxPrice}}">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Buscar</button>
+    </form>
+    <!-- Lista de productos -->
+    <div class="mt-5">
+        <h3>Product List</h3>
+        <div id="product-list">
+            {{#each products}}
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{this.name}}</h5>
+                        <p class="card-text">{{this.description}}</p>
+                        <h3 class="card-text">Price: ${{this.price}}</h3>
+                        <p class="card-text">Date: {{this.date}}</p>
+                        <p class="card-text">ID: {{this._id}}</p>
+                        <form action="/profile/products/{{this._id}}" method="POST">
+                           <input type="hidden" name="productId" value="{{this._id}}">
+                           <button type="submit" class="btn btn-primary">Agregar al Carrito</button>
+                        </form>
+                    </div>
+                </div>
+            {{/each}}
+        </div>
+    </div>
+    <!-- Paginación -->
+<nav aria-label="Page navigation example" class="mt-4">
+    <ul class="pagination justify-content-center">
+        {{#if (gt page 1)}}
+            <li class="page-item">
+                <a class="page-link" href="/products?page={{subtract page 1}}&search={{search}}&minPrice={{minPrice}}&maxPrice={{maxPrice}}">Anterior</a>
+            </li>
+        {{/if}}
+
+        {{#if (gt page 1)}}
+            <li class="page-item">
+                <a class="page-link" href="/products?page=1&search={{search}}&minPrice={{minPrice}}&maxPrice={{maxPrice}}">1</a>
+            </li>
+            {{#if (gt (subtract page 2) 1)}}
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+            {{/if}}
+        {{/if}}
+
+        {{#if (gt page 1)}}
+            <li class="page-item">
+                <a class="page-link" href="/products?page={{subtract page 1}}&search={{search}}&minPrice={{minPrice}}&maxPrice={{maxPrice}}">{{subtract page 1}}</a>
+            </li>
+        {{/if}}
+
+        <li class="page-item active">
+            <span class="page-link">{{page}}</span>
+        </li>
+
+        {{#if (lt page totalPages)}}
+            <li class="page-item">
+                <a class="page-link" href="/products?page={{add page 1}}&search={{search}}&minPrice={{minPrice}}&maxPrice={{maxPrice}}">{{add page 1}}</a>
+            </li>
+            {{#if (lt (add page 2) totalPages)}}
+                <li class="page-item disabled"><span class="page-link">...</span></li>
+            {{/if}}
+            <li class="page-item">
+                <a class="page-link" href="/products?page={{totalPages}}&search={{search}}&minPrice={{minPrice}}&maxPrice={{maxPrice}}">{{totalPages}}</a>
+            </li>
+        {{/if}}
+
+        {{#if (lt page totalPages)}}
+            <li class="page-item">
+                <a class="page-link" href="/products?page={{add page 1}}&search={{search}}&minPrice={{minPrice}}&maxPrice={{maxPrice}}">Siguiente</a>
+            </li>
+        {{/if}}
+    </ul>
+</nav>
+</div>
+

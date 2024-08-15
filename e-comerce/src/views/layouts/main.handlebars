@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+     <script>
+        window.isAuthenticated = {{#if isAuthenticated}}true{{else}}false{{/if}};
+    </script>
+    <!-- Cargar la biblioteca de Stripe -->
+<script src="https://js.stripe.com/v3/"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        header, footer {
+            background-color: #f8f9fa;
+            padding: 1rem;
+            text-align: center;
+        }
+        main {
+            flex: 1;
+            padding: 2rem;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Mi Aplicación</a>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                   <li id='login-nav-item' class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+
+                    {{#if user}}
+                         <li class="nav-item"><a class="nav-link" href="/profile">Profile</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/profile/products">Products</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/profile/dashboard">Dashboard</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/profile/cart">Cart</a></li>
+                         <li class="nav-item">
+                                <form action="/logout" method="post" class="form-inline">
+                                    <button type="submit" class="btn btn-outline-danger">Cerrar Sesión</button>
+                                </form>
+                            </li>
+                        {{#if isLoggedIn}}
+                            
+                        {{else}}
+                           
+                        {{/if}}
+                    {{else}}
+
+                    {{/if}}
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <main>
+        {{{body}}}
+    </main>
+    <script src="./viewsUtils/stripe.js">
+</script>
+    <script src="../viewsUtils/utils.js"></script> 
+    <footer>
+        <p>&copy; 2024 Mi Aplicación. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
